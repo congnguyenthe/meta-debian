@@ -16,3 +16,13 @@ BBCLASSEXTEND = "native"
 
 SRC_URI[md5sum] = "36934d00b00555eaacde9f091f392f97"
 SRC_URI[sha256sum] = "259046b0dd9130825c4a4c479ba3591d6d0f17a33f54e294b56478729a6e5ab8"
+
+#
+# debian
+#
+inherit debian-package
+DPR = "0"
+DEBIAN_SECTION = "x11"
+DPN = "x11proto-fonts"
+
+DEBIAN_PATCH_TYPE = "nopatch"
