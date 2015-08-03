@@ -10,7 +10,7 @@ DPN ?= "${BPN}"
 DPR ?= ""
 
 # default SRC_URI
-DEBIAN_GIT_DIR ?= "debian-${DPN}.git"
+DEBIAN_GIT_DIR ??= "debian-${DPN}.git"
 DEBIAN_GIT_BRANCH ?= "${DISTRO_CODENAME}-master"
 DEBIAN_SRC_URI ?= "${DEBIAN_GIT_URI}/${DEBIAN_GIT_DIR};\
 protocol=${DEBIAN_GIT_PROTOCOL};branch=${DEBIAN_GIT_BRANCH}"
@@ -86,12 +86,15 @@ debian_patch_quilt() {
 	# to be acceptable as an implementation of source package
 	if [ ! -f ${DEBIAN_QUILT_PATCHES}/series ]; then
 		bbwarn "${DEBIAN_QUILT_PATCHES}/series not found, nothing to do"
-	elif [ ! -s ${DEBIAN_QUILT_PATCHES}/series ]; then
-		bbwarn "no patch in series, nothing to do"
 	else
-		# apply patches
-		QUILT_PATCHES=${DEBIAN_QUILT_PATCHES} \
-			quilt --quiltrc /dev/null push -a
+		# sometimes series is empty, it's scary
+		if [ -z "$(sed '/^#/d' ${DEBIAN_QUILT_PATCHES}/series)" ]; then
+			bbwarn "no patch in series, nothing to do"
+		else
+			# apply patches
+			QUILT_PATCHES=${DEBIAN_QUILT_PATCHES} \
+				quilt --quiltrc /dev/null push -a
+		fi
 	fi
 
 	# avoid conflict with "do_patch"

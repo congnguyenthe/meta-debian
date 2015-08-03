@@ -1,3 +1,6 @@
+#
+# fontsproto_2.1.2.bb
+#
 require xorg-proto-common.inc
 
 SUMMARY = "XFont: X Font rasterisation headers"
@@ -14,15 +17,16 @@ PE = "1"
 
 BBCLASSEXTEND = "native"
 
-SRC_URI[md5sum] = "36934d00b00555eaacde9f091f392f97"
-SRC_URI[sha256sum] = "259046b0dd9130825c4a4c479ba3591d6d0f17a33f54e294b56478729a6e5ab8"
+SRC_URI[md5sum] = "c5f4f1fb4ba7766eedbc9489e81f3be2"
+SRC_URI[sha256sum] = "869c97e5a536a8f3c9bc8b9923780ff1f062094bab935e26f96df3d6f1aa68a9"
 
 #
 # debian
 #
 inherit debian-package
-DPR = "0"
 DEBIAN_SECTION = "x11"
+DPR = "0"
 DPN = "x11proto-fonts"
 
+# There is no debian patch
 DEBIAN_PATCH_TYPE = "nopatch"
