@@ -1,5 +1,6 @@
 #
-# gst-plugins-base_0.10.36.bb
+# base recipe: meta/recipes-multimedia/gstreamer/gst-plugins-base_0.10.36.bb
+# base branch: daisy
 #
 require gst-plugins.inc
 
